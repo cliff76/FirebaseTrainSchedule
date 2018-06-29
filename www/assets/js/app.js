@@ -1,7 +1,7 @@
-function onReady(){
+function onReady(theKeys){
     // Initialize Firebase
     var config = {
-        apiKey: "YOUR_KEY_HERE",
+        apiKey: theKeys.firebase,
         authDomain: "formdata-e4174.firebaseapp.com",
         databaseURL: "https://formdata-e4174.firebaseio.com",
         projectId: "formdata-e4174",
@@ -14,7 +14,7 @@ function onReady(){
 
 //create variables
     var trainName = "";
-    var destination = ""
+    var destination = "";
     var firstTrain = "";
     var frequency = "";
     var nextTrain = null;
@@ -123,7 +123,7 @@ function onReady(){
         var location = "39.946343,-75.162644"; //my current location
         var targetDate = new Date(); // current date/time of pc
         var timestamp = targetDate.getTime() / 1000 + targetDate.getTimezoneOffset() * 60;//current UTC date/time in seconds since midnight 1/1/1970
-        var apikey = "YOUR_KEY_HERE"; //my key
+        var apikey = theKeys.google; //my key
         var queryURL = "https://maps.googleapis.com/maps/api/timezone/json?location=" + location + '&timestamp=' + timestamp + '&key=' + apikey
 
         // Creating an AJAX call for the current time
@@ -161,5 +161,7 @@ function onReady(){
 
     */
 }
-
-onReady();
+$.ajax({url: "/keys", success: function(result) {
+    var theKeys = JSON.parse(result);
+    onReady(theKeys);
+}});
