@@ -1,7 +1,7 @@
-function onReady() {
+function onReady(theKeys) {
     // Initialize Firebase
     var config = {
-        apiKey: "YOUR_KEY_HERE",
+        apiKey: theKeys.firebase,
         authDomain: "trainschedule-9d5b7.firebaseapp.com",
         databaseURL: "https://trainschedule-9d5b7.firebaseio.com",
         projectId: "trainschedule-9d5b7",
@@ -14,7 +14,7 @@ function onReady() {
 
 //create variables
     var trainName = "";
-    var destination = ""
+    var destination = "";
     var firstTrain = "";
     var frequency = "";
     var nextTrain = null;
@@ -123,6 +123,10 @@ function onReady() {
     setInterval(displayTime, 1000);
 }
 
-onReady();
+$.ajax({url: "/keys", success: function(result) {
+        var theKeys = JSON.parse(result);
+        onReady(theKeys);
+}});
+
 
 
