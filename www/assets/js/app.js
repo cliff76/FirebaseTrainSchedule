@@ -1,4 +1,4 @@
-function onReady(){
+function onReady() {
     // Initialize Firebase
     var config = {
         apiKey: "YOUR_KEY_HERE",
@@ -96,30 +96,33 @@ function onReady(){
         tMinutesTillTrain = frequency - tRemainder;
         console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
-    // Next Train
-    nextTrain = moment().add(tMinutesTillTrain, "minutes");
-    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
-   
-      // Create the new row
-    var newRow = $("<tr>").append(
-      $("<td>").text(trainName),
-      $("<td>").text(destination),
-      $("<td>").text(frequency),
-      $("<td>").text(nextTrain),
-      $("<td>").text(tMinutesTillTrain)
-     
-    );
-  
-    // Append the new row to the table
-    $("#mainSchedule > tbody").append(newRow);
-    
-  });
-  
-  function displayTime () {
-    var currentTime = moment().format('MMM Do YYYY, h:mm:ss a');
-    $("#currentTime").text(currentTime);
+        // Next Train
+        nextTrain = moment().add(tMinutesTillTrain, "minutes");
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
-  }
-  setInterval(displayTime, 1000);
+        // Create the new row
+        var newRow = $("<tr>").append(
+            $("<td>").text(trainName),
+            $("<td>").text(destination),
+            $("<td>").text(frequency),
+            $("<td>").text(nextTrain),
+            $("<td>").text(tMinutesTillTrain)
+        );
+
+        // Append the new row to the table
+        $("#mainSchedule > tbody").append(newRow);
+
+    });
+
+    function displayTime() {
+        var currentTime = moment().format('MMM Do YYYY, h:mm:ss a');
+        $("#currentTime").text(currentTime);
+
+    }
+
+    setInterval(displayTime, 1000);
+}
+
+onReady();
 
 
